@@ -1,0 +1,15 @@
+ @if (artifact()) {
+ <h1>{{ artifact()!.title }}</h1>
+ <!-- @if(languageState.language() ==='nl') {
+ <div class="description"
+     [innerHTML]="descriptionNL()"></div>
+ } @else if(languageState.language() === 'en') {
+ <div class="description"
+     [innerHTML]="descriptionEN()"></div>
+ } -->
+ <div class="description"
+     [innerHTML]="description()"></div>
+
+ } @else {
+ <p>Loading…</p>
+ }

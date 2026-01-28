@@ -1,0 +1,25 @@
+ <div class="wrapper">
+     <div class="buttons">
+         @for(language of LANGUAGES; track language){
+         <button mat-raised-button
+             (click)="languageState.setLanguage(language)"
+             class="language">
+             {{language.flag}}
+         </button>
+         }
+         <button mat-icon-button
+             mat-dialog-close>
+             <mat-icon>close</mat-icon>
+         </button>
+     </div>
+
+
+     <div class="set-language"></div>
+
+     @if (artifact) {
+     <h1>{{ title() }}</h1>
+
+     <div class="description"
+         [innerHTML]="description()"></div>
+     }
+ </div>

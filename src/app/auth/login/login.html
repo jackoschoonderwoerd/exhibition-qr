@@ -1,0 +1,22 @@
+<form [formGroup]="form">
+    <h2 class="header">admin only</h2>
+    <mat-form-field>
+        <mat-label>email</mat-label>
+        <input type="email"
+            matInput
+            formControlName="email">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>password</mat-label>
+        <input type="password"
+            matInput
+            formControlName="password">
+    </mat-form-field>
+    <div class="buttons">
+
+        <button mat-button
+            (click)="authStore.login(form.value)">submit</button>
+        <button mat-button
+            (click)="onCancel()">cancel</button>
+    </div>
+</form>

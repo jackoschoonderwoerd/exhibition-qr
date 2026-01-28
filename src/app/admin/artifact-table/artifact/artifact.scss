@@ -1,0 +1,13 @@
+.artifact {
+    padding: 0 0.5rem;
+    background-color: lightgray;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
+    .left {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+}

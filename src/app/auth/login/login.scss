@@ -1,0 +1,24 @@
+form {
+    width: 100%;
+    max-width: 320px;
+    margin: auto;
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    .header {
+        color: var(--sahara);
+        margin-bottom: 1rem;
+    }
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        button {
+            background-color: lightblue;
+        }
+    }
+}
+
+* {
+    font-family: Roboto;
+}

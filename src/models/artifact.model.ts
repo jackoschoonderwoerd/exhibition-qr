@@ -1,13 +1,16 @@
 import { Timestamp } from "rxjs";
 
 export interface Artifact {
-  id?: string;
-  title: string
-  description: string
-  images: string[]
-  year: number
-  location: string
-  // createdAt: timestamp
-  // updatedAt: timestamp
-  visible: boolean
+    id?: string;
+    titleNL: string;
+    titleEN?: string;
+    visible: boolean
+    descriptionNL: string;
+    descriptionEN?: string;
 }
+
+// imageUrls?: string[]
+// year?: number
+// location?: string
+// createdAt: timestamp
+// updatedAt: timestamp

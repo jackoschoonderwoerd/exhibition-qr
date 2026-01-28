@@ -1,0 +1,114 @@
+<div class="wrapper">
+    <div class="top">
+        <mat-form-field class="filter"
+            appearance="outline"
+            style="width: 100%;">
+            <mat-label>Enter Filter</mat-label>
+            <input matInput
+                type="text"
+                [value]="filter()"
+                (input)="onFilterChange($any($event.target).value)" />
+        </mat-form-field>
+        <!-- Paginator -->
+
+    </div>
+    <table mat-table
+        [dataSource]="pagedArtifacts()"
+        matSort
+        (matSortChange)="onSort($event)"
+        class="mat-elevation-z2">
+
+
+        <!-- Title Column -->
+
+        <ng-container matColumnDef="titleNL">
+            <th mat-header-cell
+                class="col-title"
+                *matHeaderCellDef
+                mat-sort-header>Title NL</th>
+            <td mat-cell
+                class="col-title"
+                *matCellDef="let artifact">{{ artifact.titleNL }}</td>
+        </ng-container>
+
+
+
+        <!-- Visible Column -->
+        <!-- <ng-container matColumnDef="visible">
+                <th mat-header-cell
+                    class="col-visible"
+                    *matHeaderCellDef>Visible</th>
+                <td mat-cell
+                    class="col-visible"
+                    *matCellDef="let artifact">
+                    {{ artifact.visible ? 'Yes' : 'No' }}
+                </td>
+            </ng-container> -->
+
+        <!-- Actions Column -->
+
+        <ng-container matColumnDef="preview">
+            <th mat-header-cell
+                class="col-preview"
+                *matHeaderCellDef>Preview</th>
+            <td mat-cell
+                class="col-preview"
+                *matCellDef="let artifact">
+                <mat-icon (click)="onPreview(artifact)">visibility</mat-icon>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell
+                class="col-edit"
+                *matHeaderCellDef>Edit</th>
+            <td mat-cell
+                class="col-edit"
+                *matCellDef="let artifact">
+                <mat-icon (click)="onEdit(artifact)">edit</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell
+                class="col-delete"
+                *matHeaderCellDef>Delete</th>
+            <td mat-cell
+                class="col-delete"
+                *matCellDef="let artifact">
+                <mat-icon (click)="onDelete(artifact.id)">delete</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="download">
+            <th mat-header-cell
+                class="col-download"
+                *matHeaderCellDef>QR</th>
+            <td mat-cell
+                class="col-download"
+                *matCellDef="let artifact">
+                <span (click)="downloadQr(artifact)"
+                    class="material-symbols-outlined">
+                    download
+                </span>
+                <!-- <button mat-button
+                        color="accent"
+                        (click)="downloadQr(artifact)">
+                        Download QR
+                    </button> -->
+            </td>
+        </ng-container>
+
+
+        <tr mat-header-row
+            *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row
+            *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [length]="filteredCount()"
+        [pageSize]="pageSize()"
+        [pageIndex]="pageIndex()"
+        [pageSizeOptions]="[5, 10, 25]"
+        (page)="onPage($event)">
+    </mat-paginator>
+    <button mat-raised-button
+        (click)="onAdd()">Add Item</button>
+</div>

@@ -1,0 +1,20 @@
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    max-width: 700px;
+    margin: auto;
+    .text-editors {
+        display: flex;
+        gap: 1rem;
+        .text-editor {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+    }
+    .buttons {
+        display: flex;
+        gap: 1rem;
+    }
+}

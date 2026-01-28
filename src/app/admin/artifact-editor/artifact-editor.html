@@ -1,0 +1,40 @@
+<form [formGroup]="form">
+    <mat-form-field>
+        <mat-label>enter title NL</mat-label>
+        <input type="text"
+            matInput
+            formControlName="titleNL">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>enter title EN</mat-label>
+        <input type="text"
+            matInput
+            formControlName="titleEN">
+    </mat-form-field>
+
+    <div class="text-editors">
+        <div class="text-editor">
+            <label>Description Nederlands</label>
+            <app-quill-text-editor [changedValue]="changedNlValue()"
+                (valueChange)="onNlValueChange($event)">
+            </app-quill-text-editor>
+        </div>
+        <div class="text-editor">
+            <label>Description English</label>
+            <app-quill-text-editor [changedValue]="changedEnValue()"
+                (valueChange)="onEnValueChange($event)">
+            </app-quill-text-editor>
+        </div>
+
+    </div>
+
+    <mat-checkbox formControlName="visible">visible</mat-checkbox>
+    <div class="buttons">
+
+        <button mat-raised-button
+            (click)="onSubmit()">{{artifactEditorState.editMode() ? 'update artifact':'add artifact'}}</button>
+        <button mat-raised-button
+            (click)="onCancel()">cancel</button>
+    </div>
+</form>

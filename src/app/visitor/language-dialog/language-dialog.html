@@ -1,0 +1,20 @@
+<div class="wrapper">
+    <h4 mat-dialog-title>select language</h4>
+
+    <div class="languages">
+        @for(language of LANGUAGES; track language){
+        <button mat-raised-button
+            mat-dialog-close
+            (click)="languageState.setLanguage(language)"
+            class="language">
+            {{language.flag}}
+        </button>
+        }
+    </div>
+</div>
+<mat-dialog-content>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+
+</mat-dialog-actions>
