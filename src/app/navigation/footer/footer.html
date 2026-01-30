@@ -1,1 +1,15 @@
-<p>footer works!</p>
+<div class="footer-shell">
+    <div class="right">
+        @if(auth.isLoggedIn()){
+        <a routerLink="artifact-table"><span class="material-symbols-outlined">table</span></a>
+        <button mat-icon-button
+            (click)="auth.logout()">
+            <span class="material-symbols-outlined">logout</span>
+        </button>
+        }
+        @if(!auth.isLoggedIn()){
+        <a routerLink="login"
+            class="icon-link"><span class="material-symbols-outlined">login</span></a>
+        }
+    </div>
+</div>

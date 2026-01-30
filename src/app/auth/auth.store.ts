@@ -5,12 +5,12 @@ import {
     UserCredential,
     signInWithEmailAndPassword
 } from '@angular/fire/auth';
-import { FirebaseError } from '@angular/fire/app';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { SnackbarService } from '../services/snackbar.service';
 import { FirestoreService } from '../services/firestore.service';
 import { WrongEmailPasswordComponent } from './wrong-email-password/wrong-email-password.component';
+import { onAuthStateChanged } from 'firebase/auth';
 
 // import { WrongEmailPasswordComponent } from './login/wrong-email-password/wrong-email-password.component';
 
@@ -20,11 +20,13 @@ export class AuthStore {
 
     // ---------- STATE ----------
     private _state = signal({
-        isLoggedIn: false
+        isLoggedIn: false,
+        initialized: false
     });
 
     // ---------- COMPUTED ----------
     isLoggedIn = computed(() => this._state().isLoggedIn);
+    initialized = computed(() => this._state().initialized);
 
     // ---------- INJECTIONS ----------
     private auth = inject(Auth);
@@ -33,8 +35,13 @@ export class AuthStore {
     private snackbar = inject(SnackbarService);
     private fs = inject(FirestoreService);
 
+    constructor() {
+        this.persistLogin(); // ✅ ensures auth state syncs on app start
+    }
+
     // ---------- METHODS ----------
     async login(user: { email: string; password: string }): Promise<void> {
+        console.log('login()')
         if (!user) return;
 
         try {
@@ -43,8 +50,8 @@ export class AuthStore {
 
             this._state.update(s => ({ ...s, isLoggedIn: true }));
 
-            this.snackbar.openSnackbar(`you are logged in : ${userCredential.user.email}`);
-            this.router.navigateByUrl('/upcoming-shows');
+            this.snackbar.openSnackbar(`you are logged in : ${userCredential.user.email}`, 3000);
+            this.router.navigateByUrl('/artifact-table');
 
         } catch (err: any) {
             const error = err as AuthError;
@@ -60,11 +67,12 @@ export class AuthStore {
     }
 
     async logout(): Promise<void> {
+        console.log('logout()')
         try {
             await this.auth.signOut();
-            this.snackbar.openSnackbar('you are successfully logged out');
+            this.snackbar.openSnackbar('you are successfully logged out', 3000);
         } catch (err) {
-            this.snackbar.openSnackbar('failed to log out');
+            this.snackbar.openSnackbar('failed to log out', 3000);
         }
 
         this._state.update(s => ({ ...s, isLoggedIn: false }));
@@ -72,8 +80,12 @@ export class AuthStore {
 
     /** If Firebase already has a session */
     persistLogin() {
-        this._state.update(s => (
-            { ...s, isLoggedIn: true }
-        ));
+        onAuthStateChanged(this.auth, user => {
+            this._state.update(s => ({
+                ...s,
+                isLoggedIn: !!user,
+                initialized: true
+            }));
+        });
     }
 }

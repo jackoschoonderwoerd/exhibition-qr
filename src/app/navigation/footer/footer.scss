@@ -1,0 +1,17 @@
+.footer-shell {
+    background-color: #0b3f5f;
+    display: flex;
+    justify-content: right;
+    padding: 0.3rem;
+
+    * {
+        color: white;
+    }
+    .icon-link {
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+    }
+}

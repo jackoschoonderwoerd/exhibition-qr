@@ -7,10 +7,16 @@ form {
     .text-editors {
         display: flex;
         gap: 1rem;
+        margin-bottom: 1rem;
         .text-editor {
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
+            background-color: white;
+            label {
+                padding: 0.5rem;
+                font-weight: bold;
+            }
         }
     }
     .buttons {

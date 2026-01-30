@@ -1,14 +1,24 @@
 // mat-dialog-content {
 .wrapper {
     padding: 1rem;
-    .languages {
+    // background-color: red;
+    // height: 100%;
+    h4 {
+        text-align: center;
+        text-transform: uppercase;
+    }
+    .buttons {
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+
+        gap: 0.7rem;
         button {
+            background-color: lightgray;
+            width: 3rem;
+            margin: auto;
             font-size: 1.7rem; // make emoji bigger
             padding: 0.25rem 0.5rem;
-            margin-right: 0.25rem;
+            // margin-right: 0.25rem;
         }
     }
 }

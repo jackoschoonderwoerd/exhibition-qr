@@ -8,8 +8,17 @@ import { provideAuth } from '@angular/fire/auth';
 import { getAuth } from 'firebase/auth';
 import { provideServiceWorker } from '@angular/service-worker';
 
+import { MatIconRegistry } from '@angular/material/icon';
+import { inject } from '@angular/core';
+
+
+
+
 
 export const appConfig: ApplicationConfig = {
+
+
+
     providers: [
         provideBrowserGlobalErrorListeners(),
         provideRouter(routes),

@@ -1,9 +1,9 @@
-import { Component, computed, EventEmitter, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { FirestoreService } from '../../services/firestore.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Artifact } from '../../../models/artifact.model';
-import { downloadArtifactQrPdf } from '../../utils/qr-pdf.util';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { downloadArtifactQrPdf, downloadBatchQrPdf } from '../../utils/qr-pdf.util';
+import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatSortModule, Sort } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,6 +18,7 @@ import { SnackbarService } from '../../services/snackbar.service';
 import { FirebaseError } from 'firebase/app';
 import { MatDialog } from '@angular/material/dialog';
 import { Preview } from './preview/preview';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
     selector: 'app-artifact-table',
@@ -27,11 +28,10 @@ import { Preview } from './preview/preview';
         MatSortModule,
         MatButtonModule,
         A11yModule,
-        // RouterLink,
         RouterModule,
         MatInputModule,
         FormsModule,
-        MatIconModule
+        MatIconModule, MatCheckboxModule
     ],
     templateUrl: './artifact-table.html',
     styleUrl: './artifact-table.scss',
@@ -49,8 +49,7 @@ export class ArtifactTable {
     });
 
     editorState = inject(ArtifactEditorState)
-
-    displayedColumns = ['titleNL', 'preview', 'edit', 'delete', 'download'];
+    displayedColumns = ['titleNL', 'preview', 'edit', 'delete', 'download', 'print'];
 
     // Pagination signals
     pageIndex = signal(0);
@@ -96,6 +95,56 @@ export class ArtifactTable {
         const start = this.pageIndex() * this.pageSize();
         return data.slice(start, start + this.pageSize());
     });
+    // -------------------------------------------- PRINT PDF BATCH -------------
+    // holds selected artifact IDs
+    selectedForPrint = signal<Set<string>>(new Set());
+
+    toggleSelection(artifact: Artifact, checked: boolean) {
+        if (!artifact.id) return;
+
+        const next = new Set(this.selectedForPrint());
+
+        checked ? next.add(artifact.id) : next.delete(artifact.id);
+
+        this.selectedForPrint.set(next);
+    }
+
+    isSelected(artifact: Artifact): boolean {
+        return !!artifact.id && this.selectedForPrint().has(artifact.id);
+    }
+
+    selectedCount = computed(() => this.selectedForPrint().size);
+
+    toggleAll(checked: boolean) {
+        if (!checked) {
+            this.selectedForPrint.set(new Set());
+            return;
+        }
+
+        const all = new Set(
+            this.artifacts()
+                .map(a => a.id)
+                .filter(Boolean) as string[]
+        );
+
+        this.selectedForPrint.set(all);
+    }
+
+    printSelected() {
+        const selectedIds = this.selectedForPrint();
+
+        const artifactsToPrint = this.artifacts().filter(
+            a => a.id && selectedIds.has(a.id)
+        );
+
+        if (!artifactsToPrint.length) return;
+
+        downloadBatchQrPdf(artifactsToPrint);
+    }
+
+
+
+    // ---------------------------------------------
 
     onFilterChange(value: string) {
         this.filter.set(value);

@@ -7,7 +7,7 @@ import { SnackbarService } from '../../../services/snackbar.service';
 import { ConfirmService } from '../../../services/confirm.service';
 import { FirebaseError } from 'firebase/app';
 import { MatButtonModule } from '@angular/material/button';
-import { VisibilityEyesComponent } from '../../../shared/visibility-eyes/visibility-eyes.component';
+
 import { downloadArtifactQrPdf } from '../../../utils/qr-pdf.util';
 
 @Component({
@@ -45,14 +45,14 @@ export class ArtifactComponent {
                 const path = `artifacts/${this.artifact().id}`
                 this.fs.deleteDoc(path)
                     .then((res: any) => {
-                        this.sb.openSnackbar('artifact deleted')
+                        this.sb.openSnackbar('artifact deleted', 3000)
                     })
                     .catch((err: FirebaseError) => {
-                        this.sb.openSnackbar(`operation failed due to: ${err.message}`)
+                        this.sb.openSnackbar(`operation failed due to: ${err.message}`, 3000)
                     })
 
             } else {
-                this.sb.openSnackbar(`operation aborted by user`);
+                this.sb.openSnackbar(`operation aborted by user`, 3000);
             }
         })
     }

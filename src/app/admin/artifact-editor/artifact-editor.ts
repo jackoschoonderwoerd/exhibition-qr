@@ -128,13 +128,13 @@ export class ArtifactEditor {
     addArtifact(artifact: Artifact) {
         this.fs.addDoc(`artifacts`, artifact)
             .then((res: any) => {
-                this.sb.openSnackbar(`artifact ${artifact.titleNL} added`);
+                this.sb.openSnackbar(`artifact ${artifact.titleNL} added`, 3000);
                 this.form.reset();
                 this.router.navigateByUrl('artifact-table')
             })
             .catch((err: FirebaseError) => {
                 console.log(err);
-                this.sb.openSnackbar(`operation failed due to: ${err.message}`)
+                this.sb.openSnackbar(`operation failed due to: ${err.message}`, 3000)
             })
 
     }
@@ -142,14 +142,14 @@ export class ArtifactEditor {
         const path = `artifacts/${this.artifactEditorState.artifact().id}`
         this.fs.updateDoc(path, artifact)
             .then((res: any) => {
-                this.sb.openSnackbar(`artifact ${artifact.titleNL} updated`)
+                this.sb.openSnackbar(`artifact ${artifact.titleNL} updated`, 3000)
                 this.form.reset();
                 this.artifactEditorState.clear();
                 this.router.navigateByUrl('artifact-table')
             })
             .catch((err: FirebaseError) => {
                 console.log(err.message)
-                this.sb.openSnackbar(`operation failed due to: ${err.message}`)
+                this.sb.openSnackbar(`operation failed due to: ${err.message}`, 3000)
             })
     }
 

@@ -1,32 +1,21 @@
 <mat-toolbar color="primary">
     <div class="links">
         <div class="left">
-            <div class="flag"
-                (click)="onSelectLanguage()">{{languageState.language().flag}}</div>
-            <a routerLink="qr-scanner">scan</a>
+
             <a routerLink="landing-page"
                 class="home">
-                <mat-icon>home</mat-icon>
+                <span class="material-symbols-outlined">home</span>
             </a>
-
         </div>
         <div class="right">
-            @if(auth.isLoggedIn()){
-            <a routerLink="artifact-table">table</a>
-            <button mat-icon-button
-                (click)="auth.logout()">
-                <mat-icon>logout</mat-icon>
-            </button>
-            }
-            @if(!auth.isLoggedIn()){
-            <button mat-icon-button>
-                <a routerLink="login">
-                    <mat-icon>login</mat-icon>
-                </a>
-            </button>
+            <div class="flag"
+                (click)="onSelectLanguage()">{{languageState.language().flag}}</div>
+            <a routerLink="qr-scanner"><span class="material-symbols-outlined">
+                    qr_code
+                </span></a>
 
-            }
         </div>
+
     </div>
 
 

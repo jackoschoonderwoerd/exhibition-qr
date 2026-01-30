@@ -10,7 +10,14 @@
                 (input)="onFilterChange($any($event.target).value)" />
         </mat-form-field>
         <!-- Paginator -->
+        <button mat-raised-button
+            class="print-multiple-btn"
+            color="primary"
+            [disabled]="selectedCount() === 0"
+            (click)="printSelected()">
 
+            Download {{ selectedCount() }} QR codes
+        </button>
     </div>
     <table mat-table
         [dataSource]="pagedArtifacts()"
@@ -54,7 +61,11 @@
             <td mat-cell
                 class="col-preview"
                 *matCellDef="let artifact">
-                <mat-icon (click)="onPreview(artifact)">visibility</mat-icon>
+
+                <span class="material-symbols-outlined"
+                    (click)="onPreview(artifact)">
+                    preview
+                </span>
             </td>
         </ng-container>
 
@@ -65,7 +76,11 @@
             <td mat-cell
                 class="col-edit"
                 *matCellDef="let artifact">
-                <mat-icon (click)="onEdit(artifact)">edit</mat-icon>
+
+                <span class="material-symbols-outlined"
+                    (click)="onEdit(artifact)">
+                    edit
+                </span>
             </td>
         </ng-container>
         <ng-container matColumnDef="delete">
@@ -75,7 +90,10 @@
             <td mat-cell
                 class="col-delete"
                 *matCellDef="let artifact">
-                <mat-icon (click)="onDelete(artifact.id)">delete</mat-icon>
+                <span class="material-symbols-outlined"
+                    (click)="onDelete(artifact.id)">
+                    delete
+                </span>
             </td>
         </ng-container>
         <ng-container matColumnDef="download">
@@ -89,11 +107,28 @@
                     class="material-symbols-outlined">
                     download
                 </span>
-                <!-- <button mat-button
-                        color="accent"
-                        (click)="downloadQr(artifact)">
-                        Download QR
-                    </button> -->
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="print">
+            <!-- <th mat-header-cell
+                *matHeaderCellDef>
+                Print
+            </th> -->
+            <th mat-header-cell
+                *matHeaderCellDef
+                class="col-batch-download">
+                <mat-checkbox [checked]="selectedCount() === artifacts().length"
+                    [indeterminate]="selectedCount() > 0 && selectedCount() < artifacts().length"
+                    (change)="toggleAll($event.checked)">
+                </mat-checkbox>
+            </th>
+
+            <td mat-cell
+                *matCellDef="let artifact">
+                <mat-checkbox [checked]="isSelected(artifact)"
+                    (change)="toggleSelection(artifact, $event.checked)">
+                </mat-checkbox>
             </td>
         </ng-container>
 
@@ -103,12 +138,15 @@
         <tr mat-row
             *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator [length]="filteredCount()"
-        [pageSize]="pageSize()"
-        [pageIndex]="pageIndex()"
-        [pageSizeOptions]="[5, 10, 25]"
-        (page)="onPage($event)">
-    </mat-paginator>
-    <button mat-raised-button
-        (click)="onAdd()">Add Item</button>
+    <div class="bottom">
+        <button class="add"
+            mat-raised-button
+            (click)="onAdd()">Add Item</button>
+        <mat-paginator [length]="filteredCount()"
+            [pageSize]="pageSize()"
+            [pageIndex]="pageIndex()"
+            [pageSizeOptions]="[5, 10, 25]"
+            (page)="onPage($event)">
+        </mat-paginator>
+    </div>
 </div>

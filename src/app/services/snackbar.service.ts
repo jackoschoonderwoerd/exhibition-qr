@@ -9,8 +9,7 @@ export class SnackbarService {
     snackbar = inject(MatSnackBar)
     constructor() { }
 
-    openSnackbar(message: string) {
-        this.snackbar.open(message, 'close')
+    openSnackbar(message: string, duration = 3000) {
+        this.snackbar.open(message, undefined, { duration })
     }
-
 }

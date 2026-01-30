@@ -1,5 +1,5 @@
 mat-toolbar {
-    background-color: blue !important;
+    background-color: #0b3f5f !important;
     color: white;
     .links {
         width: 100%;
@@ -13,7 +13,6 @@ mat-toolbar {
             align-items: center;
             // border: 1px solid yellow;
             .home {
-                margin-top: 5px;
             }
         }
         .right {
@@ -35,4 +34,10 @@ mat-toolbar {
             cursor: pointer;
         }
     }
+}
+
+.material-symbols-outlined {
+    margin-top: 5px;
+    font-size: 1.9rem;
+    // border: 1px solid white;
 }
