@@ -27,14 +27,6 @@ export class ArtifactPage {
 
     constructor(private htmlSanitizerService: HtmlSanitizerService) { }
 
-    // descriptionNL = computed(() =>
-    //     this.htmlSanitizerService.sanitize(this.artifact()?.descriptionNL ?? '')
-    // );
-
-    // descriptionEN = computed(() =>
-    //     this.htmlSanitizerService.sanitize(this.artifact()?.descriptionEN ?? '')
-    // );
-
     description = computed(() => {
         const artifact = this.artifact();
         if (!artifact) return '';
@@ -45,11 +37,13 @@ export class ArtifactPage {
         return this.htmlSanitizerService.sanitize(value);
     });
 
-    // description = computed(() => {
-    //     const artifact = this.artifact();
-    //     if (!artifact) return '';
-    //     const lang = this.languageState.language();
-    //     const value = artifact[`description${lang.toUpperCase()}`];
-    //     return this.htmlSanitizerService.sanitize(value ?? '');
-    // });
+    title = computed(() => {
+        const artifact = this.artifact();
+        if (!artifact) return '';
+
+        const langCode = this.languageState.language()?.code ?? 'en';
+        const value = (artifact as any)[`title${langCode.toUpperCase()}`] ?? artifact.descriptionEn ?? '';
+
+        return this.htmlSanitizerService.sanitize(value);
+    });
 }

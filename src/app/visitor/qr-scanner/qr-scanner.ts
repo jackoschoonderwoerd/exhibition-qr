@@ -5,34 +5,17 @@ import {
     inject,
     signal,
 } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { Html5Qrcode } from 'html5-qrcode';
 
 @Component({
     standalone: true,
+    imports: [MatButtonModule],
     selector: 'app-qr-scanner',
     templateUrl: './qr-scanner.html',
     styleUrls: ['./qr-scanner.scss'],
-    template: `
-    <!-- <div class="scanner">
-      <div id="qr-reader"></div>
 
-      @if (error()) {
-        <p class="error">{{ error() }}</p>
-      }
-    </div> -->
-  `,
-    styles: [`
-    // .scanner {
-    //   display: flex;
-    //   justify-content: center;
-    //   padding: 1rem;
-    // }
-    // #qr-reader {
-    //   width: 100%;
-    //   max-width: 320px;
-    // }
-  `],
 })
 export class QrScanner implements AfterViewInit, OnDestroy {
     private router = inject(Router);
@@ -41,12 +24,18 @@ export class QrScanner implements AfterViewInit, OnDestroy {
     error = signal<string | null>(null);
     private scanned = false;
 
-    async ngAfterViewInit() {
+    async start() {
         try {
             this.scanner = new Html5Qrcode('qr-reader');
 
+            if (!this.scanner) {
+                this.error.set(
+                    'Camera not available. Try reopening the app or use Safari.'
+                );
+            }
+
             await this.scanner.start(
-                { facingMode: 'environment' },
+                { facingMode: 'environment' }, // fallback below if needed
                 {
                     fps: 10,
                     qrbox: { width: 250, height: 250 },
@@ -54,9 +43,28 @@ export class QrScanner implements AfterViewInit, OnDestroy {
                 text => this.onScan(text),
                 () => { }
             );
-        } catch {
+        } catch (err) {
+            console.error(err);
             this.error.set('Camera access denied or unavailable');
         }
+    }
+
+    async ngAfterViewInit() {
+        // try {
+        //     this.scanner = new Html5Qrcode('qr-reader');
+
+        //     await this.scanner.start(
+        //         { facingMode: 'environment' },
+        //         {
+        //             fps: 10,
+        //             qrbox: { width: 250, height: 250 },
+        //         },
+        //         text => this.onScan(text),
+        //         () => { }
+        //     );
+        // } catch {
+        //     this.error.set('Camera access denied or unavailable');
+        // }
     }
 
     async onScan(text: string) {

@@ -38,6 +38,16 @@ export const routes: Routes = [
             .then(c => c.Login)
     },
     {
+        path: 'notes',
+        loadComponent: () => import('./admin/notes/notes')
+            .then(c => c.Notes)
+    },
+    {
+        path: 'pwa-notes',
+        loadComponent: () => import('./admin/pwa-notes/pwa-notes')
+            .then(c => c.PwaNotes)
+    },
+    {
         path: '**',
         loadComponent: () => import('./visitor/landing-page/landing-page')
             .then(c => c.LandingPage)

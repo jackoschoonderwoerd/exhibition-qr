@@ -50,8 +50,8 @@ Thumbs.db
 
 #angular
 src/environments
-environment.prod.ts
-environment.ts
+src/environment.prod.ts
+src/environment.ts
 NOTES.txt
 
 

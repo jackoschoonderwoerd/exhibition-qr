@@ -1,44 +1,75 @@
-<div class="wrapper">
-    @if(languageState.language().code=== 'en') {
+<div class="welcome-shell">
 
-    <h3>
+    @if(languageState.language().code==='nl') {
 
-        Exhibition Guide – Concept Overview
-    </h3>
+
+    <h2>Welkom 👋</h2>
+
     <p>
-
-        This application is designed to enrich exhibitions by connecting physical artifacts to digital content through QR codes. Visitors can simply use the camera or QR scanner on their own smartphone to scan a code placed next to an object and immediately access curated information, images, and background stories.
+        Met deze app ontdek je de tentoonstelling in je eigen tempo.
     </p>
-    <p>
 
-        The guide runs as a progressive web app, meaning it works directly in the browser and can be installed on a device to function like a native app. This allows for a smooth, app-like experience without requiring visitors to download anything from an app store.
+    <p>
+        Scan de QR-codes bij de kunstwerken om verhalen, afbeeldingen, achtergrondinformatie
+        en extra context te bekijken — direct op je telefoon.
     </p>
-    <p>
-        Content can be presented in multiple languages and updated centrally, giving curators full control over what visitors see — both during and after the exhibition. Visitors are free to explore at their own pace, revisit artifacts, and engage more deeply with the collection.
 
+    <p>
+        Je hoeft niets te installeren om te beginnen.
+        Wil je de app vaker gebruiken, dan kun je deze <strong>toevoegen aan je beginscherm</strong>
+        voor snelle toegang en volledig scherm.
     </p>
-    }
-    @if(languageState.language().code==='nl'){
 
-    <h3>Exhibition Guide – Digitale Begeleidingsapp</h3>
     <p>
-
-        Deze applicatie is ontworpen om tentoonstellingen te verrijken door fysieke objecten te verbinden met rijke digitale content. Bezoekers kunnen een QR-code naast een object scannen om direct toegang te krijgen tot zorgvuldig samengestelde informatie, afbeeldingen en achtergrondverhalen op hun eigen apparaat.
+        <strong>Tip voor iPhone-gebruikers:</strong><br>
+        Open de app in <strong>Safari</strong> om deze aan je beginscherm toe te voegen.
+        Apple staat het toevoegen van webapps aan het beginscherm alleen via Safari toe.
     </p>
+
     <p>
-
-        De app beschikt over een ingebouwde QR-scanner, maar werkt ook probleemloos met de standaardcamera of QR-scanner die op de meeste smartphones beschikbaar is. De applicatie draait rechtstreeks in de browser en kan op het apparaat worden geïnstalleerd, waardoor zij functioneert als een native app zonder dat een download via een app store nodig is.
-
+        Begin met het ontdekken van de tentoonstelling en bekijk verhalen, afbeeldingen
+        en achtergrondinformatie bij elk kunstwerk.
     </p>
-    <p>
 
-        De inhoud is beschikbaar in meerdere talen en kan centraal worden beheerd en bijgewerkt. Dit maakt het voor organisaties eenvoudig om informatie actueel te houden en tentoonstellingen flexibel aan te passen. Bezoekers kunnen de tentoonstelling in hun eigen tempo verkennen en objecten op elk gewenst moment opnieuw bekijken.
-    </p>
     <p>
-        Deze aanpak biedt een toegankelijke, flexibele en toekomstbestendige manier om de tentoonstellingservaring te verdiepen.
+        Veel plezier tijdens je bezoek!
     </p>
 
 
     }
+    @if(languageState.language().code==='en') {
+    <h2>Welcome 👋</h2>
 
+    <p>
+        This app lets you explore the exhibition at your own pace.
+    </p>
+
+    <p>
+        Scan the QR codes next to the artworks to discover stories, images, background
+        information, and extra context — right on your phone.
+    </p>
+
+    <p>
+        You don’t need to install anything to get started.
+        If you like, you can <strong>add the app to your home screen</strong> for quicker access
+        and a full-screen experience.
+    </p>
+
+    <p>
+        <strong>Tip for iPhone users:</strong><br>
+        To add this app to your home screen, please open it in <strong>Safari</strong>.
+        Apple requires Safari for adding web apps to the home screen.
+    </p>
+
+    <p>
+        Start exploring the exhibition and discover stories, images, and background
+        information for each artwork.
+    </p>
+
+    <p>
+        Enjoy your visit!
+    </p>
+
+
+    }
 </div>
