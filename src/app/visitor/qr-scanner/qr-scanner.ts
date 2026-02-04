@@ -29,9 +29,12 @@ export class QrScanner implements AfterViewInit, OnDestroy {
             this.scanner = new Html5Qrcode('qr-reader');
 
             if (!this.scanner) {
+                alert('no scanner')
                 this.error.set(
                     'Camera not available. Try reopening the app or use Safari.'
                 );
+            } else {
+                alert('scanner present')
             }
 
             await this.scanner.start(

@@ -52,6 +52,8 @@ Thumbs.db
 src/environments
 src/environment.prod.ts
 src/environment.ts
+environment.prod.ts
+environment.ts
 NOTES.txt
 
 

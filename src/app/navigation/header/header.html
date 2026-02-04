@@ -4,15 +4,16 @@
 
             <a routerLink="landing-page"
                 class="home">
-                <span class="material-symbols-outlined">home</span>
+
+                <mat-icon>home</mat-icon>
             </a>
         </div>
         <div class="right">
             <div class="flag"
                 (click)="onSelectLanguage()">{{languageState.language().flag}}</div>
-            <a routerLink="qr-scanner"><span class="material-symbols-outlined">
-                    qr_code
-                </span></a>
+            <a routerLink="qr-scanner">
+                <mat-icon>scanner</mat-icon>
+            </a>
 
         </div>
 

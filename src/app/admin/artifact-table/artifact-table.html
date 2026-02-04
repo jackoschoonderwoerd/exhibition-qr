@@ -61,11 +61,8 @@
             <td mat-cell
                 class="col-preview"
                 *matCellDef="let artifact">
+                <mat-icon (click)="onPreview(artifact)">visibility</mat-icon>
 
-                <span class="material-symbols-outlined"
-                    (click)="onPreview(artifact)">
-                    preview
-                </span>
             </td>
         </ng-container>
 
@@ -76,11 +73,10 @@
             <td mat-cell
                 class="col-edit"
                 *matCellDef="let artifact">
-
-                <span class="material-symbols-outlined"
-                    (click)="onEdit(artifact)">
+                <mat-icon (click)="onEdit(artifact)">
                     edit
-                </span>
+                </mat-icon>
+
             </td>
         </ng-container>
         <ng-container matColumnDef="delete">
@@ -90,10 +86,8 @@
             <td mat-cell
                 class="col-delete"
                 *matCellDef="let artifact">
-                <span class="material-symbols-outlined"
-                    (click)="onDelete(artifact.id)">
-                    delete
-                </span>
+                <mat-icon (click)="onDelete(artifact.id)">delete</mat-icon>
+
             </td>
         </ng-container>
         <ng-container matColumnDef="download">
@@ -103,10 +97,8 @@
             <td mat-cell
                 class="col-download"
                 *matCellDef="let artifact">
-                <span (click)="downloadQr(artifact)"
-                    class="material-symbols-outlined">
-                    download
-                </span>
+                <mat-icon (click)="downloadQr(artifact)">arrow_downward</mat-icon>
+
             </td>
         </ng-container>
 

@@ -23,6 +23,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 @Component({
     selector: 'app-artifact-table',
     imports: [
+        MatIconModule,
         MatTableModule,
         MatPaginatorModule,
         MatSortModule,

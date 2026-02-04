@@ -1,5 +1,17 @@
 <div class="app-shell">
     <app-header />
+    <!-- @if (updateAvailable()) {
+    <div class="update-banner">
+        <span>
+            A new version of the app is available.
+        </span>
+
+        <button mat-button
+            (click)="refreshApp()">
+            Refresh
+        </button>
+    </div>
+    } -->
     <main class="content">
         <router-outlet />
     </main>
